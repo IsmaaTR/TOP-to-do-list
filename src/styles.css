@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --beige-color: #FAF1E6;
+    --light-beige-color: #FDFAF6;
+    --light-aqua: #E4EFE7;
+    --green-color: #809b70;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+#main-container {
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: minmax(100px, 300px) repeat(3, minmax(100px, 1fr));
+    grid-template-rows: repeat(4, 1fr) 100px;
+}
+    
+#sidebar {
+    grid-row: span 5 / span 5;
+    background-color: var(--green-color);
+}
+
+#project-container {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-column: span 3 / span 3;
+    grid-row: span 4 / span 4;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    grid-column: span 3 / span 3;
+    grid-column-start: 2;
+    grid-row-start: 5;
+    color: var(--green-color)
+}
+
+#github-logo {
+    height: 30px;
+    padding-left: 10px;
+    fill: var(--green-color);
+}
