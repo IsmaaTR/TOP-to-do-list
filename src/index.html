@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>To do List</title>
 </head>
 <body>
@@ -12,9 +11,45 @@
                 <p>+</p>
                 <p>New project</p>
             </div>
-        </div>
-        <div id="project-container">
+            <div id="projects-container">
 
+            </div>
+        </div>
+        <div id="project-detail-container">
+            <h1>Mi primer proyecto</h1>
+            <hr>
+            <div class="tarea">
+                <div class="task-check-container">
+                    <input type="radio" name="finishTask1" id="finishTask1">
+                </div>
+                <div class="task-title-container">
+                    <p>Tarea 1</p>
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+                        </svg>                        
+                    </button>
+                </div>
+                <div class="task-date-container">
+                    <p>10-10-10</p>
+                </div>
+            </div>
+            <div class="tarea">
+                <div class="task-check-container">
+                    <input type="radio" name="finishTask2" id="finishTask2">
+                </div>
+                <div class="task-title-container">
+                    <p>Tarea 1</p>
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="task-date-container">
+                    <p>10-10-10</p>
+                </div>
+            </div>
         </div>
         <div id="footer">
             <p>Copyright © <script> document.write(new Date().getFullYear()); </script> IsmaaTR</p>
@@ -23,5 +58,22 @@
             </a>
         </div>
     </div>
+    <!-- New project dialog -->
+    <dialog id="add-project-modal" class="modal">
+        <div id="project-modal-container">
+            <p>Create your project</p>
+            <form id="project-modal-form" action="newProject">
+                <div class="form-row">
+                    <label for="projectName">Name:</label>
+                    <input type="text" name="projectName" id="projectName" maxlength="30" required>
+                </div>
+                <div class="form-submit">
+                    <button id="submit-new-project">Create project</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <!-- New task dialog -->
+
 </body>
 </html>

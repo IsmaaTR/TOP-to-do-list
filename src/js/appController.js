@@ -8,7 +8,7 @@ window.appController = (function () {
     let projects = [];
 
     function init() {
-        console.log(projectModule);
+        UIModule.init(appController);
     }
 
     function findProject(id) {
@@ -18,8 +18,7 @@ window.appController = (function () {
     function addProject(name) {
         const project = projectModule.createProject(name);
         projects.push(project);
-        console.log(projects);
-        return projects;
+        UIModule.renderProjectList(projects);
     }
 
     function deleteProject(id) {
