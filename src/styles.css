@@ -7,6 +7,12 @@
     --green-color: #809b70;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -62,8 +68,73 @@ body {
 #project-container {
     grid-column-start: 2;
     grid-row-start: 1;
-    grid-column: span 3 / span 3;
-    grid-row: span 4 / span 4;
+    grid-column: span 3;
+    grid-row: span 4;
+    padding: 50px;
+}
+
+#project-container h1 {
+    margin-bottom: 20px;
+}
+
+.tarea {
+    margin: 20px;
+    margin-left: 0;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    background-color: var(--light-aqua);
+    padding: 20px;
+}
+
+.task-check-container {
+    grid-row: span 2;
+}
+
+.task-check-container input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    color: var(--green-color)
+}
+
+.task-check-container input[type="radio"]:checked {
+    background-color: var(--green-color)
+}
+
+.task-title-container {
+    grid-column-start: 2;
+    grid-column: span 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-title-container p {
+    font-size: 1.3rem;
+}
+
+.task-title-container button {
+    width: 30px;
+    height: 30px;
+    background-color: var(--green-color);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.task-title-container button:hover {
+    box-shadow: 0 0 3px 1px rgb(0, 0, 0);
+}
+
+.task-date-container {
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.task-date-container p {
+    font-size: 0.8rem;
 }
 
 #footer {
