@@ -109,7 +109,7 @@ export const UIModule = (function () {
             const titleContainer = document.createElement('div');
             titleContainer.classList.add('task-title-container');
             const taskTitle = document.createElement('p');
-            taskTitle.textContent = task.title;
+            taskTitle.textContent = `${task.title} - ${task.description}`;
             const deleteButton = document.createElement('button');
             if (task.priority === 'High') {
                 deleteButton.classList.add('high-prio-btn');
