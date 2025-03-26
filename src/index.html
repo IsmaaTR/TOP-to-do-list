@@ -16,40 +16,6 @@
             </div>
         </div>
         <div id="project-detail-container">
-            <h1>Mi primer proyecto</h1>
-            <hr>
-            <div class="tarea">
-                <div class="task-check-container">
-                    <input type="radio" name="finishTask1" id="finishTask1">
-                </div>
-                <div class="task-title-container">
-                    <p>Tarea 1</p>
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
-                        </svg>                        
-                    </button>
-                </div>
-                <div class="task-date-container">
-                    <p>10-10-10</p>
-                </div>
-            </div>
-            <div class="tarea">
-                <div class="task-check-container">
-                    <input type="radio" name="finishTask2" id="finishTask2">
-                </div>
-                <div class="task-title-container">
-                    <p>Tarea 1</p>
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="task-date-container">
-                    <p>10-10-10</p>
-                </div>
-            </div>
         </div>
         <div id="footer">
             <p>Copyright © <script> document.write(new Date().getFullYear()); </script> IsmaaTR</p>
@@ -74,6 +40,36 @@
         </div>
     </dialog>
     <!-- New task dialog -->
-
+    <dialog id="add-task-modal" class="modal">
+        <div id="task-modal-container">
+            <p>Add a new task</p>
+            <form action="newTask" id="task-modal-form">
+                <div class="form-row">
+                    <label for="taskTitle">Title</label>
+                    <input type="text" name="taskTitle" id="taskTitle" required>
+                </div>
+                <div class="form-row">
+                    <label for="taskDescription">Description</label>
+                    <input type="text" name="taskDescription" id="taskDescription" required>
+                </div>
+                <div class="form-row">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="date" name="taskDueDate" id="taskDueDate">
+                </div>
+                <div class="form-row">
+                    <label for="taskPriority">Priority</label>
+                    <select name="taskPriority" id="taskPriority">
+                        <option value="">Select...</option>
+                        <option value="Low">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="form-submit">
+                    <button id="submit-new-task">Create task</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
 </body>
 </html>

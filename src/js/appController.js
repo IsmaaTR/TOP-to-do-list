@@ -23,14 +23,14 @@ window.appController = (function () {
 
     function deleteProject(id) {
         projects = projects.filter(project => project.id !== id);
-        console.log(projects);
-        return projects;
+        UIModule.renderProjectList(projects);
     }
 
     function addTask(projectId, title, description, priority, dueDate) {
-        const task = taskModule.createTask(title, description, priority, dueDate);
-        const projectTasks = findProject(projectId).addTask(task);
-        console.log(projectTasks);
+        const task = taskModule.createTask(title, description, dueDate, priority);
+        const project = findProject(parseInt(projectId));
+        project.addTask(task);
+        UIModule.renderProjectDetail(project);
     }
 
     function deleteTask(projectId, taskId) {

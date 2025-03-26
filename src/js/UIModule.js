@@ -5,6 +5,8 @@ export const UIModule = (function () {
     const newProjectForm = document.querySelector('#project-modal-form');
     const projectsContainer = document.querySelector('#projects-container');
     const projectDetailContainer = document.querySelector('#project-detail-container');
+    const newTaskModal = document.querySelector('#add-task-modal');
+    const newTaskForm = document.querySelector('#task-modal-form');
 
     function init(appController) {
         addEventListeners(appController);
@@ -32,11 +34,30 @@ export const UIModule = (function () {
             newProjectModal.close();
         });
 
+        //Close new task modal
+        newTaskModal.addEventListener('click', (event) => {
+            if (event.target === newTaskModal) {
+                newTaskModal.close();
+            }
+        });
+
+        //Submit new task modal
+        newTaskForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const projectId = document.querySelector('#add-new-task-button').dataset.id;
+            const taskTitle = document.querySelector('#taskTitle').value;
+            const taskDescription = document.querySelector('#taskDescription').value;
+            const taskPriority = document.querySelector('#taskPriority').value;
+            const taskDueDate = document.querySelector('#taskDueDate').value;
+            appController.addTask(projectId, taskTitle, taskDescription, taskPriority, taskDueDate);
+            newTaskForm.reset();
+            newTaskModal.close();
+        });
     }
 
     function renderProjectList(projects) {
         projectsContainer.replaceChildren();
-        projects.forEach(proyect => {
+        projects.forEach(project => {
             const projectContainer = document.createElement('div');
             projectContainer.classList.add('project-container');
             projectContainer.insertAdjacentHTML("afterbegin",
@@ -45,17 +66,85 @@ export const UIModule = (function () {
                 </svg>`
             );
             const projectNameParagraph = document.createElement('p');
-            projectNameParagraph.textContent = proyect.name;
+            projectNameParagraph.textContent = project.name;
             projectContainer.appendChild(projectNameParagraph);
+            projectContainer.addEventListener('click', () => {
+                renderProjectDetail(project);
+            });
             projectsContainer.appendChild(projectContainer);
         });
 
     }
 
-    function renderProjectTasks(project) {
+    function renderProjectDetail(project) {
+        projectDetailContainer.replaceChildren();
 
+        const projectNameH1 = document.createElement('h1');
+        projectNameH1.innerText = project.name;
+        projectDetailContainer.appendChild(projectNameH1);
+        projectDetailContainer.appendChild(document.createElement('hr'));
+
+        project.tasks.forEach(task => {
+            // Crear contenedor principal
+            const taskDiv = document.createElement('div');
+            taskDiv.classList.add('tarea');
+
+            // Crear el contenedor del radio button
+            const checkContainer = document.createElement('div');
+            checkContainer.classList.add('task-check-container');
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.name = `finishTask${task.id}`;
+            radioInput.id = `finishTask${task.id}`;
+            checkContainer.appendChild(radioInput);
+
+            // Crear el contenedor del título y botón
+            const titleContainer = document.createElement('div');
+            titleContainer.classList.add('task-title-container');
+            const taskTitle = document.createElement('p');
+            taskTitle.textContent = task.title;
+            const deleteButton = document.createElement('button');
+
+            // Insertar SVG en el botón
+            deleteButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+                </svg>
+            `;
+            titleContainer.appendChild(taskTitle);
+            titleContainer.appendChild(deleteButton);
+
+            // Crear el contenedor de la fecha
+            const dateContainer = document.createElement('div');
+            dateContainer.classList.add('task-date-container');
+            const dateText = document.createElement('p');
+            dateText.textContent = task.dueDate;
+            dateContainer.appendChild(dateText);
+
+            // Agregar elementos al contenedor principal
+            taskDiv.appendChild(checkContainer);
+            taskDiv.appendChild(titleContainer);
+            taskDiv.appendChild(dateContainer);
+
+            projectDetailContainer.appendChild(taskDiv);
+        });
+
+        const newTaskDiv = document.createElement('div');
+        newTaskDiv.classList.add('new-task');
+        const newTaskButton = document.createElement('button');
+        newTaskButton.innerText = '+';
+        newTaskButton.id = 'add-new-task-button';
+        newTaskButton.dataset.id = project.id;
+        newTaskButton.addEventListener('click', () => {
+            newTaskModal.showModal();
+        })
+        const newTaskPar = document.createElement('p');
+        newTaskPar.innerText = 'Create new task';
+        newTaskDiv.appendChild(newTaskButton);
+        newTaskDiv.appendChild(newTaskPar);
+        projectDetailContainer.appendChild(newTaskDiv);
     }
 
-    return { init, renderProjectList, renderProjectTasks};
+    return { init, renderProjectList, renderProjectDetail};
 
 })();
