@@ -1,6 +1,7 @@
 export const projectModule = (function () {
 
     let lastId = 0;
+    const priorityOrder = { 'High': 3, 'Medium': 2, 'Low': 1};
 
     function createProject(name) {
 
@@ -9,6 +10,12 @@ export const projectModule = (function () {
 
         function addTask(task) {
             tasks.push(task);
+            tasks.sort((task1, task2) => {
+                if (task1.finished !== task2.finished) {
+                    return task1.finished - task2.finished;
+                }
+                return priorityOrder[task2.priority] - priorityOrder[task1.priority];
+            })
             return tasks;
         }
 

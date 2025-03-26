@@ -88,6 +88,13 @@ export const UIModule = (function () {
             // Crear contenedor principal
             const taskDiv = document.createElement('div');
             taskDiv.classList.add('tarea');
+            if (task.priority === 'High') {
+                taskDiv.classList.add('high-prio');
+            } else if (task.priority === 'Medium') {
+                taskDiv.classList.add('medium-prio');
+            } else if (task.priority === 'Low') {
+                taskDiv.classList.add('low-prio');
+            }
 
             // Crear el contenedor del radio button
             const checkContainer = document.createElement('div');
@@ -104,6 +111,13 @@ export const UIModule = (function () {
             const taskTitle = document.createElement('p');
             taskTitle.textContent = task.title;
             const deleteButton = document.createElement('button');
+            if (task.priority === 'High') {
+                deleteButton.classList.add('high-prio-btn');
+            } else if (task.priority === 'Medium') {
+                deleteButton.classList.add('medium-prio-btn');
+            } else if (task.priority === 'Low') {
+                deleteButton.classList.add('low-prio-btn');
+            }
 
             // Insertar SVG en el botón
             deleteButton.innerHTML = `
