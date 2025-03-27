@@ -52,14 +52,17 @@ window.appController = (function () {
     }
 
     function deleteTask(projectId, taskId) {
-        const projectTasks = findProject(projectId).deleteTask(taskId);
+        const project = findProject(projectId);
+        project.deleteTask(taskId);
         actualizarInfoProyectos();
-        console.log(projectTasks);
+        UIModule.renderProjectDetail(project);
     }
 
     function finishTask(projectId, taskId) {
-        findProject(projectId).finishTask(taskId);
+        const project = findProject(projectId);
+        project.finishTask(taskId);
         actualizarInfoProyectos();
+        UIModule.renderProjectDetail(project);
     }
 
     function actualizarInfoProyectos() {

@@ -20,11 +20,7 @@ export const projectModule = (function () {
         }
 
         function deleteTask(id) {
-            tasks.forEach( task => {
-                if (task.id === id) {
-                    tasks = tasks.filter(task => task.id !== id);
-                }
-            });
+            tasks = tasks.filter(task => task.id !== id);
         }
 
         function finishTask(id) {
