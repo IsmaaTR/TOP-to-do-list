@@ -110,6 +110,12 @@ export const UIModule = (function () {
             radioInput.type = 'radio';
             radioInput.name = `finishTask${task.id}`;
             radioInput.id = `finishTask${task.id}`;
+            radioInput.addEventListener('click', () => {
+                finishTaskFunction(project.id, task.id);
+            });
+            if (task.finished === true) {
+                radioInput.checked = true;
+            }
             checkContainer.appendChild(radioInput);
 
             // Crear el contenedor del título y botón
@@ -117,6 +123,9 @@ export const UIModule = (function () {
             titleContainer.classList.add('task-title-container');
             const taskTitle = document.createElement('p');
             taskTitle.textContent = `${task.title} - ${task.description}`;
+            if (task.finished === true) {
+                taskTitle.style.textDecoration = 'line-through';
+            }
             const deleteButton = document.createElement('button');
             if (task.priority === 'High') {
                 deleteButton.classList.add('high-prio-btn');

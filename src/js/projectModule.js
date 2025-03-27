@@ -10,13 +10,17 @@ export const projectModule = (function () {
 
         function addTask(task) {
             tasks.push(task);
+            sortTasks();
+            return tasks;
+        }
+
+        function sortTasks() {
             tasks.sort((task1, task2) => {
                 if (task1.finished !== task2.finished) {
                     return task1.finished - task2.finished;
                 }
                 return priorityOrder[task2.priority] - priorityOrder[task1.priority];
-            })
-            return tasks;
+            });
         }
 
         function deleteTask(id) {
@@ -29,6 +33,7 @@ export const projectModule = (function () {
                     task.finish();
                 }
             });
+            sortTasks();
         }
 
         return {

@@ -19,7 +19,7 @@ window.appController = (function () {
         projectDataArray.forEach(projectData => {
             const project = projectModule.createProject(projectData.name);
             projectData.tasks.forEach(taskData => {
-                const task = taskModule.createTask(taskData.title, taskData.description, taskData.dueDate, taskData.priority);
+                const task = taskModule.createTask(taskData.title, taskData.description, taskData.dueDate, taskData.priority, taskData.finished);
                 project.addTask(task);
             });
             projects.push(project);
@@ -44,7 +44,7 @@ window.appController = (function () {
     }
 
     function addTask(projectId, title, description, priority, dueDate) {
-        const task = taskModule.createTask(title, description, dueDate, priority);
+        const task = taskModule.createTask(title, description, dueDate, priority, false);
         const project = findProject(parseInt(projectId));
         project.addTask(task);
         actualizarInfoProyectos();

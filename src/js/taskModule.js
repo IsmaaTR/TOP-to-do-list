@@ -2,10 +2,9 @@ export const taskModule = (function () {
 
     let lastId = 0;
 
-    function createTask(title, description, dueDate, priority) {
+    function createTask(title, description, dueDate, priority, finished) {
 
         const id = ++lastId;
-        let finished = false;
 
         function finish() {
             finished = true;
