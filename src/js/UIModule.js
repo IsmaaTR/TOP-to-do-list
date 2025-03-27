@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const UIModule = (function () {
     //DOM Elements
     const newProjectButton = document.querySelector('#new-project-container');
@@ -48,7 +50,7 @@ export const UIModule = (function () {
             const taskTitle = document.querySelector('#taskTitle').value;
             const taskDescription = document.querySelector('#taskDescription').value;
             const taskPriority = document.querySelector('#taskPriority').value;
-            const taskDueDate = document.querySelector('#taskDueDate').value;
+            const taskDueDate = format(document.querySelector('#taskDueDate').value, "dd-MM-yyyy");
             appController.addTask(projectId, taskTitle, taskDescription, taskPriority, taskDueDate);
             newTaskForm.reset();
             newTaskModal.close();

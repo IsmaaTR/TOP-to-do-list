@@ -9,6 +9,21 @@ window.appController = (function () {
 
     function init() {
         UIModule.init(appController);
+        loadDatabaseProjects();
+        UIModule.renderProjectList(projects);
+    }
+
+    function loadDatabaseProjects() {
+        const projectsString = localStorage.getItem('projects');
+        let projectDataArray = projectsString ? JSON.parse(projectsString) : [];
+        projectDataArray.forEach(projectData => {
+            const project = projectModule.createProject(projectData.name);
+            projectData.tasks.forEach(taskData => {
+                const task = taskModule.createTask(taskData.title, taskData.description, taskData.dueDate, taskData.priority);
+                project.addTask(task);
+            });
+            projects.push(project);
+        });
     }
 
     function findProject(id) {
@@ -18,11 +33,13 @@ window.appController = (function () {
     function addProject(name) {
         const project = projectModule.createProject(name);
         projects.push(project);
+        actualizarInfoProyectos();
         UIModule.renderProjectList(projects);
     }
 
     function deleteProject(id) {
         projects = projects.filter(project => project.id !== id);
+        actualizarInfoProyectos();
         UIModule.renderProjectList(projects);
     }
 
@@ -30,16 +47,24 @@ window.appController = (function () {
         const task = taskModule.createTask(title, description, dueDate, priority);
         const project = findProject(parseInt(projectId));
         project.addTask(task);
+        actualizarInfoProyectos();
         UIModule.renderProjectDetail(project);
     }
 
     function deleteTask(projectId, taskId) {
         const projectTasks = findProject(projectId).deleteTask(taskId);
+        actualizarInfoProyectos();
         console.log(projectTasks);
     }
 
     function finishTask(projectId, taskId) {
         findProject(projectId).finishTask(taskId);
+        actualizarInfoProyectos();
+    }
+
+    function actualizarInfoProyectos() {
+        localStorage.removeItem('projects');
+        localStorage.setItem('projects', JSON.stringify(projects));
     }
 
     return { init, addProject, deleteProject, addTask, deleteTask, finishTask, get projects() { return projects; } };
