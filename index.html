@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>To do List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div id="main-container">
+        <div id="sidebar">
+            <p id="sidebar-title">My Projects</p>
+            <div id="new-project-container">
+                <p>+</p>
+                <p>New project</p>
+            </div>
+            <div id="projects-container">
+
+            </div>
+        </div>
+        <div id="project-detail-container">
+        </div>
+        <div id="footer">
+            <p>Copyright © <script> document.write(new Date().getFullYear()); </script> IsmaaTR</p>
+            <a href="https://github.com/IsmaaTR" target="_blank" rel="noopener noreferrer">
+                <img id="github-logo" src="da01fd58b4b122b08b46.svg" />
+            </a>
+        </div>
+    </div>
+    <!-- New project dialog -->
+    <dialog id="add-project-modal" class="modal">
+        <div id="project-modal-container">
+            <p>Create your project</p>
+            <form id="project-modal-form" action="newProject">
+                <div class="form-row">
+                    <label for="projectName">Name:</label>
+                    <input type="text" name="projectName" id="projectName" maxlength="30" required>
+                </div>
+                <div class="form-submit">
+                    <button id="submit-new-project">Create project</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <!-- New task dialog -->
+    <dialog id="add-task-modal" class="modal">
+        <div id="task-modal-container">
+            <p>Add a new task</p>
+            <form action="newTask" id="task-modal-form">
+                <div class="form-row">
+                    <label for="taskTitle">Title</label>
+                    <input type="text" name="taskTitle" id="taskTitle" required>
+                </div>
+                <div class="form-row">
+                    <label for="taskDescription">Description</label>
+                    <input type="text" name="taskDescription" id="taskDescription" required>
+                </div>
+                <div class="form-row">
+                    <label for="taskDueDate">Due Date</label>
+                    <input type="date" name="taskDueDate" id="taskDueDate" required>
+                </div>
+                <div class="form-row">
+                    <label for="taskPriority">Priority</label>
+                    <select name="taskPriority" id="taskPriority" required>
+                        <option value="">Select...</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    </select>
+                </div>
+                <div class="form-submit">
+                    <button id="submit-new-task">Create task</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+</body>
+</html>
